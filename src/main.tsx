@@ -23,31 +23,60 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    children: [
+      {
+        path: "/",
+        element: <Home />,
+      },
+      {
+        path: "/games",
+        element: <Games />,
+      },
+      {
+        path: "/zones",
+        element: <Zones />,
+      },
+      {
+        path: "/manage",
+        element: <Manage />,
+      },
+      {
+        path: "/signin",
+        element: <Signin />,
+      },
+      {
+        path: "/signup",
+        element: <Signup />,
+      },
+    ],
   },
-  {
-    path: "/home",
-    element: <Home />,
-  },
-  {
-    path: "/games",
-    element: <Games />,
-  },
-  {
-    path: "/zones",
-    element: <Zones />,
-  },
-  {
-    path: "/manage",
-    element: <Manage />,
-  },
-  {
-    path: "/signin",
-    element: <Signin />,
-  },
-  {
-    path: "/signup",
-    element: <Signup />,
-  },
+  // {
+  //     }
+  // },
+  // {
+  //   path: "/home",
+  //   element: <Home />,
+  // },
+  // {
+  //   path: "/games",
+  //   element: <Games />,
+  // },
+  // {
+  //   path: "/zones",
+  //   element: <Zones />,
+  // },
+  // {
+  //   path: "/manage",
+  //   element: <Manage />,
+  // },
+  // {
+  //   path: "/signin",
+  //   element: <Signin />,
+  // },
+  // {
+  //   path: "/signup",
+  //   element: <Signup />,
+  // },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(

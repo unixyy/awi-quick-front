@@ -1,4 +1,3 @@
-import Navbar from "./Navbar";
 import GameSearchBar from "./GameSearchBar";
 import HeaderCarousel from "./HeaderCarousel";
 import Table, { TableData, StylizedCell, StylizedHeader } from "./Table";
@@ -67,7 +66,6 @@ export default function Games() {
 
   return (
     <div className="flex flex-col h-screen">
-      <Navbar />
       <HeaderCarousel slides={images} title="Games" />
       <GameSearchBar />
       <Table
