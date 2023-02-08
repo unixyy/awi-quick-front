@@ -1,7 +1,7 @@
 export default function Signup() {
   return (
-    <div className="w-max">
-        <form className="flex flex-col justify-center space-y-4">
+    <div className="flex justify-center">
+        <form className="flex flex-col flex-wrap space-y-4">
             <div className="flex flex-col">
                 <label htmlFor="username" className="text-left">Username</label>
                 <input type="text" className="rounded" name="username" id="username" />

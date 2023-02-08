@@ -30,10 +30,13 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
+  /*display: flex;*/
   min-width: 320px;
   min-height: 100vh;
+}
+
+.contents {
+  display: contents;
 }
 
 h1 {
@@ -78,5 +81,11 @@ button:focus-visible {
 }
 
 .bezier-scale:hover {
-  transform: scale(1.2);
+  transform: scale(1.1);
+}
+
+ul > li {
+  display: flex;
+    align-items: center;
+
 }
