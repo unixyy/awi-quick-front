@@ -12,23 +12,24 @@ interface GameData extends TableData {
   zones?: string[];
 }
 
+
 const gameHeaders = (withZones: boolean) => (
-  <>
+  <div className="bg-emerald-800 rounded-lg shadow-lg p-6 m-4 flex flex-row">
     <StylizedHeader content="ID" />
     <StylizedHeader content="Name" />
     <StylizedHeader content="Type" />
     {withZones && <StylizedHeader content="Zone" />}
-  </>
+  </div>
 );
 const gameCellFactory = (row: TableData) => {
   const content = row as GameData;
   return (
-    <>
+    <div className="bg-emerald-800 rounded-lg shadow-lg p-6 m-4  flex flex-col">
       <StylizedCell content={content.id} />
       <StylizedCell content={content.name} />
       <StylizedCell content={content.type} />
       {content.zones && <StylizedCell content={content.zones.join(", ")} />}
-    </>
+    </div>
   );
 };
 

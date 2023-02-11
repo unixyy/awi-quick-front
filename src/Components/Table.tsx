@@ -27,8 +27,9 @@ export const StylizedHeader = (content: CellContent) => (
 );
 
 export const StylizedCell = (content: CellContent) => (
-  <td className="px-4 py-2">{content.content}</td>
+  <div className="px-4 py-2">{content.content}</div>
 );
+
 
 export default function Table(props: TableProps) {
   const [currentPage, setCurrentPage] = useState(1);
@@ -41,24 +42,22 @@ export default function Table(props: TableProps) {
   const handleClick = (pageNumber: number) => setCurrentPage(pageNumber);
 
   return (
-    <div className="p-6 rounded-lg">
-      <table className="table-auto w-full text-left bg-emerald-800 text-white">
-        <thead>
-          <tr className="bg-emerald-900 border-b">{props.headers}</tr>
-        </thead>
-        <tbody>
+    <div className="py-2 lg:p-6 rounded-lg">
+      {/*<table className="table-auto w-full text-left bg-emerald-800 text-white">*/}
+      {/*  <thead>*/}
+      {/*    <tr className="bg-emerald-900 border-b">{props.headers}</tr>*/}
+      {/*  </thead>*/}
+        <ul className="w-max grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
           {currentData.map((row, index) => (
-            <tr
+            <li
               key={row.id}
-              className={`${
-                index % 2 === 0 ? "bg-emerald-800" : "bg-emerald-700"
-              } px-4 py-2`}
+              className={`px-4 py-2 w-80 lg:w-96 align-middle`}
             >
               {props.cellFactory(row)}
-            </tr>
+            </li>
           ))}
-        </tbody>
-      </table>
+        </ul>
+      {/*</table>*/}
       <div className="mt-6">
         <Pagination
           dataPerPage={dataPerPage}

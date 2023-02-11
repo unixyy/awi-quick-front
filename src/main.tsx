@@ -8,7 +8,7 @@ import Games from "./Components/Games";
 import Zones from "./Components/Zones";
 import Manage from "./Components/Manage";
 import Signin from "./Components/Signin";
-import Signup from "./Components/Signup";
+import Error from "./Components/Error";
 
 const Spinner = (
   <div
@@ -23,6 +23,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    errorElement: <Error />,
     children: [
       {
         path: "/",
@@ -44,39 +45,8 @@ const router = createBrowserRouter([
         path: "/signin",
         element: <Signin />,
       },
-      {
-        path: "/signup",
-        element: <Signup />,
-      },
     ],
   },
-  // {
-  //     }
-  // },
-  // {
-  //   path: "/home",
-  //   element: <Home />,
-  // },
-  // {
-  //   path: "/games",
-  //   element: <Games />,
-  // },
-  // {
-  //   path: "/zones",
-  //   element: <Zones />,
-  // },
-  // {
-  //   path: "/manage",
-  //   element: <Manage />,
-  // },
-  // {
-  //   path: "/signin",
-  //   element: <Signin />,
-  // },
-  // {
-  //   path: "/signup",
-  //   element: <Signup />,
-  // },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(

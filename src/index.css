@@ -7,6 +7,7 @@
   font-size: 16px;
   line-height: 24px;
   font-weight: 400;
+  width: 10fr;
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
@@ -84,8 +85,8 @@ button:focus-visible {
   transform: scale(1.1);
 }
 
-ul > li {
-  display: flex;
-    align-items: center;
-
+ul {
+  display: grid;
+  align-items: center;
+  grid-template-columns: 1fr 1fr 1fr;
 }

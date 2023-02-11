@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { UserCircleIcon } from "@heroicons/react/24/outline";
 import Hamburger from 'hamburger-react'
 import {useState} from "react";
+import {volunteerDto} from "../dto/volunteer.dto";
 
 interface UserInfo {
   username: string;
@@ -78,11 +79,11 @@ export default function Navbar() {
       }
     }
   }
-
+  const user : volunteerDto = JSON.parse(String(localStorage.getItem("user")));
   const [isToggled, setToggled] = useState(false)
   const userInfo = {
-    username: "Iusildra",
-    email: "lucas.nouguier@protonmail.com",
+    name: user.firstName + " " + user.lastName,
+    email: user.email,
   };
   return (
     <nav className="p-3 rounded-xl bg-emerald-800 border-emerald-700 px-10 sm:px-4 py-2.5 mb-10">
@@ -110,9 +111,6 @@ export default function Navbar() {
             <li>
               <StylizedLink to="/signin" text="Sign In" size="text-xl" />
             </li>
-            <li>
-              <StylizedLink to="/signup" text="Sign Up" size="text-xl" />
-            </li>
           </ul>
           <ul>
             <li>
@@ -134,7 +132,7 @@ export default function Navbar() {
                 >
                   <div className="px-4 py-3">
               <span className="block text-sm text-white">
-                {userInfo.username}
+                {userInfo.name}
               </span>
                     <span className="block text-sm font-medium text-gray-400">
                 {userInfo.email}
