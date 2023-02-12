@@ -13,13 +13,13 @@ export default function Pagination(props: PaginationProps) {
 
   return (
     <nav className="text-center">
-      <ul className="pagination flex justify-center space-x-4">
+      <ul className="pagination flex justify-center space-x-4 ">
         {pageNumbers.map((pageNumber) => (
           <li
             key={pageNumber}
             className={`page-item ${props.currentPage === pageNumber ? 'active' : ''}`}
           >
-            <button onClick={() => props.handleClick(pageNumber)} className="page-link">
+            <button onClick={() => props.handleClick(pageNumber)} className="page-link bg-light-brown-palet">
               {pageNumber}
             </button>
           </li>
