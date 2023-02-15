@@ -23,7 +23,6 @@ export default function Signin() {
     useEffect(() => {
         console.log("entering useEffect");
         if (localStorage.getItem("user") !== null) {
-            console.log("redirecting");
             navigate("../");
         }
     });

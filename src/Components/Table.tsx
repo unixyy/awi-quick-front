@@ -14,17 +14,12 @@ interface CellContent {
 interface TableProps {
     data: TableData[];
     elementPerPage: number;
-    headers: JSX.Element;
     cellFactory: (row: TableData) => JSX.Element;
 }
 
 export interface TableData {
     id: string | number;
 }
-
-export const StylizedHeader = (content: CellContent) => (
-    <th className="px-4 py-2">{content.content}</th>
-);
 
 export const StylizedCell = (content: CellContent) => (
     <div className="px-4 py-2">{content.content}</div>
@@ -42,7 +37,7 @@ export default function Table(props: TableProps) {
 
     return (
         <div className="py-2 lg:p-6 rounded-lg flex flex-col align-center">
-            <ul className="w-max grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
+            <ul className="w-max cards grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 ">
                 {currentData.map((row, index) => (
                     <li
                         key={row.id}

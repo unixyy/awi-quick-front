@@ -85,13 +85,13 @@ export default function Navbar() {
         <nav className="p-3 rounded-xl bg-maroon-palet border-emerald-700 px-10 sm:px-4 py-2.5 mb-10">
             <div
                 id="principal"
-                className="container flex  mx-5 items-center justify-between"
+                className="container flex flex-row flex-wrap md:mx-5 items-center justify-between max-md:ml-auto max-md:mr-auto"
             >
                 <div className="mx-5 mr-auto contents">
                     <StylizedLink
                         to="/"
                         text="Festival du Jeu !"
-                        size="text-2xl"
+                        size="text-2xl max-md:text-4xl"
                     />
                 </div>
 
@@ -106,34 +106,34 @@ export default function Navbar() {
                             <StylizedLink
                                 to="/games"
                                 text="Jeux"
-                                size="text-xl"
+                                size="text-xl max-md:text-3xl"
                             />
                         </li>
                         <li>
                             <StylizedLink
                                 to="/zones"
                                 text="Zones"
-                                size="text-xl"
+                                size="text-xl max-md:text-3xl"
                             />
                         </li>
                         <li>
                             <StylizedLink
                                 to="/manage"
                                 text="Gestion"
-                                size="text-xl"
+                                size="text-xl max-md:text-3xl"
                             />
                         </li>
                         <li>
                             <StylizedLink
                                 to="/signin"
                                 text="Sign In"
-                                size="text-xl"
+                                size="text-xl max-md:text-3xl"
                             />
                         </li>
                     </ul>
                     <ul>
                         <li>
-                            <div className="flex items-center mr-5 md:order-2 max-md:ml-auto">
+                            <div className="flex items-center mr-5 order-2 flex-row-reverse max-md:ml-auto">
                                 <button
                                     type="button"
                                     className="flex text-sm bg-maroon-palet rounded-full md:mr-0 p-0"

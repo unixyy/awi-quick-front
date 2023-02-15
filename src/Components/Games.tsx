@@ -1,6 +1,5 @@
-import GameSearchBar from "./GameSearchBar";
 import HeaderCarousel from "./HeaderCarousel";
-import Table, { TableData, StylizedCell, StylizedHeader } from "./Table";
+import Table, { TableData, StylizedCell } from "./Table";
 import { useEffect, useState } from "react";
 import { GameDto } from "../dto/games.dto";
 import routes from "../routes/routes";
@@ -12,14 +11,6 @@ interface GameData extends TableData {
     zones?: string[];
 }
 
-const gameHeaders = (withZones: boolean) => (
-    <div className="bg-maroon-palet rounded-lg shadow-lg p-6 m-4 flex flex-row">
-        <StylizedHeader content="ID" />
-        <StylizedHeader content="Name" />
-        <StylizedHeader content="Type" />
-        {withZones && <StylizedHeader content="Zone" />}
-    </div>
-);
 const gameCellFactory = (row: TableData) => {
     const content = row as GameData;
     return (
@@ -59,24 +50,46 @@ const images = [
 
 export default function Games() {
     const [games, setGames] = useState<GameDto[]>([]);
+    const [searchResult, setSearchResult] = useState<GameDto[]>([]);
 
     useEffect(() => {
         fetch(routes.gameRoot)
             .then((response) => response.json())
-            .then((data) => setGames(data));
+            .then((data) => {
+              setGames(data)
+              setSearchResult(data)
+            });
     }, []);
 
-    return (
+  function handleSearch(event: React.ChangeEvent<HTMLInputElement>) {
+    const search = event.target.value;
+    const result = games.filter((game) => {
+      return (
+        game.name.toLowerCase().includes(search.toLowerCase()) ||
+        game.type.toLowerCase().includes(search.toLowerCase())
+      );
+    });
+    setSearchResult(result);
+  }
+
+  return (
         <div className="flex flex-col h-screen">
             <HeaderCarousel slides={images} title="Games" />
-            <GameSearchBar />
+            {/*<GameSearchBar />*/}
+          <div className="bg-maroon-palet p-6 rounded-b-lg flex flex-col items-center">
+            <input type={"text"}
+                   className={"w-64 rounded-lg bg-white text-gray-800 focus:outline-none focus:shadow-outline flex-grow"}
+                   placeholder={"Search a Game"}
+                   onChange={handleSearch}
+            />
+
+          </div>
             <button className="w-max mr-6 ml-auto mt-12 font-bold text-xl bg-green-600 ">
                 Create
             </button>
             <Table
-                data={games}
+                data={searchResult}
                 elementPerPage={6}
-                headers={gameHeaders(false)}
                 cellFactory={gameCellFactory}
             />
         </div>
