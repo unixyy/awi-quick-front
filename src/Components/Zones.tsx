@@ -1,4 +1,4 @@
-import Table, {StylizedCell, TableData} from "./Table";
+import Table, {TextBlock, TableData} from "./Table";
 import {useEffect, useState} from "react";
 import {ZoneDto} from "../dto/zones.dto";
 import routes from "../routes/routes";
@@ -16,8 +16,8 @@ const zoneCellFactory = (row: TableData) => {
   const content = row as ZoneData;
   return (
     <div className="bg-brown-palet rounded-lg shadow-lg p-6 m-4  flex flex-col">
-      <StylizedCell content={content.name} />
-      <StylizedCell content={content.num} />
+      <TextBlock content={content.name} />
+      <TextBlock content={content.num} />
     </div>
   );
 };

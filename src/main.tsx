@@ -4,7 +4,7 @@ import App from "./App";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 import Home from "./Components/Home";
-import Games from "./Components/Games";
+import Games from "./Pages/Games";
 import Zones from "./Components/Zones";
 import Manage from "./Components/Manage";
 import Signin from "./Components/Signin";

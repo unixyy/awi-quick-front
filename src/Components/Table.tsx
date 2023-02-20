@@ -21,7 +21,7 @@ export interface TableData {
     id: string | number;
 }
 
-export const StylizedCell = (content: CellContent) => (
+export const TextBlock = (content: CellContent) => (
     <div className="px-4 py-2">{content.content}</div>
 );
 

@@ -1,5 +1,5 @@
 import HeaderCarousel from "./HeaderCarousel";
-import Table, { TableData, StylizedCell } from "./Table";
+import Table, { TableData, TextBlock } from "./Table";
 import { useEffect, useState } from "react";
 import { GameDto } from "../dto/games.dto";
 import routes from "../routes/routes";
@@ -15,11 +15,11 @@ const gameCellFactory = (row: TableData) => {
     const content = row as GameData;
     return (
         <div className="bg-brown-palet rounded-lg shadow-lg p-6 m-4  flex flex-col">
-            <StylizedCell content={content.id} />
-            <StylizedCell content={content.name} />
-            <StylizedCell content={content.type} />
+            <TextBlock content={content.id} />
+            <TextBlock content={content.name} />
+            <TextBlock content={content.type} />
             {content.zones && (
-                <StylizedCell content={content.zones.join(", ")} />
+                <TextBlock content={content.zones.join(", ")} />
             )}
         </div>
     );
