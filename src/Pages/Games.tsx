@@ -4,28 +4,7 @@ import { GameDto } from "../dto/games.dto";
 import routes from "../routes/routes";
 import DisplayPage from "./templates/DisplayPage";
 
-const images = [
-  {
-    title: "Slide 1",
-    src: "../front-bg/boardgame1.jpg",
-    alt: "Slide 1",
-  },
-  {
-    title: "Slide 2",
-    src: "../front-bg/boardgame2.jpg",
-    alt: "Slide 2",
-  },
-  {
-    title: "Slide 3",
-    src: "../front-bg/boardgame3.jpg",
-    alt: "Slide 3",
-  },
-  {
-    title: "Slide 4",
-    src: "../front-bg/boardgame4.jpg",
-    alt: "Slide 4",
-  },
-];
+
 
 const gameCellFactory = (row: TableData) => {
   const content = row as GameDto;
@@ -40,8 +19,10 @@ const gameCellFactory = (row: TableData) => {
 };
 
 export default function GamePage() {
+
   const [games, setGames] = useState<GameDto[]>([]);
   const [searchResult, setSearchResult] = useState<GameDto[]>([]);
+  const src = "../front-bg/boardgame1.webp";
 
   useEffect(() => {
     fetch(routes.gameRoot)
@@ -63,12 +44,16 @@ export default function GamePage() {
     setSearchResult(result);
   }
   return (
-    <DisplayPage
-      title={"Games"}
-      images={images}
-      searchResult={searchResult}
-      handleSearch={handleSearch}
-      entityCellFactory={gameCellFactory}
-    />
+    <div>
+      <div className={"w3-container"}>
+      <img title={"Board Game"} src={src} alt="Board Game" className=" w-full h-[calc(80vh-10rem)] object-cover rounded-t-lg pointer-events-none" />
+        <div className={"w3-centered text-6xl"}>Games</div>
+      </div>
+      <DisplayPage
+        searchResult={searchResult}
+        handleSearch={handleSearch}
+        entityCellFactory={gameCellFactory}
+      />
+    </div>
   );
 }

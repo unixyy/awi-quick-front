@@ -1,14 +1,21 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {createBrowserRouter, Navigate, RouterProvider} from "react-router-dom";
 import "./index.css";
-import Home from "./Components/Home";
+import Home from "./Pages/Home";
 import Games from "./Pages/Games";
-import Zones from "./Components/Zones";
-import Manage from "./Components/Manage";
-import Signin from "./Components/Signin";
-import Error from "./Components/Error";
+import Zones from "./Pages/Zones";
+import Manage from "./Pages/Admin/Manage";
+import Signin from "./Pages/Signin";
+import Error from "./Pages/Error";
+import {isLoggedIn} from "./Middlewares/auth";
+import ManageGames from "./Pages/Admin/ManageGames";
+import ManageZones from "./Pages/Admin/ManageZones";
+import ManageMenu from "./Pages/Admin/ManageMenu";
+import ManageVolunteers from "./Pages/Admin/ManageVolunteers";
+import axios from "axios";
+import Cookies from "js-cookie";
 
 const Spinner = (
   <div
@@ -18,6 +25,8 @@ const Spinner = (
     <span className="visually-hidden">Loading...</span>
   </div>
 );
+
+axios.defaults.headers["Authorization"] = `Bearer ${Cookies.get("token")}`;
 
 const router = createBrowserRouter([
   {
@@ -39,11 +48,29 @@ const router = createBrowserRouter([
       },
       {
         path: "/manage",
-        element: <Manage />,
+        element: isLoggedIn() ? <Manage /> : <Navigate to={"/signin"} />,
+        children: [
+          {
+            path: "/manage",
+            element: <ManageMenu/>,
+          },
+          {
+            path: "/manage/games",
+            element: <ManageGames />,
+          },
+          {
+            path: "/manage/zones",
+            element: <ManageZones />,
+          },
+          {
+            path: "/manage/volunteers",
+            element: <ManageVolunteers />,
+          }
+        ],
       },
       {
         path: "/signin",
-        element: <Signin />,
+        element: isLoggedIn() ? <Navigate to={"/"} /> : <Signin />,
       },
     ],
   },

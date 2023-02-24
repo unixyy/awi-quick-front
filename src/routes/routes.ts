@@ -8,6 +8,10 @@ const gamesByType = (type: string) => gameRoot + "type/" + type;
 const gameByZone = (zoneId: number, zoneNumber?: number) =>
   gameRoot + "zone/" + zoneId + (zoneNumber ? "/" + zoneNumber : "");
 const zoneRoot = root + "zone/";
+const authRoot = root + "auth/";
+const signInRoot = authRoot + "signin";
+const volunteerRoot = root + "volunteer/";
+const volunteerByZone = (zoneId: number) => volunteerRoot + zoneId;
 
 const routes = {
   root,
@@ -17,6 +21,11 @@ const routes = {
   gamesByType,
   gameByZone,
   zoneRoot,
+  authRoot,
+  signInRoot,
+  volunteerRoot,
+  volunteerByZone,
+
 };
 
 export default routes;

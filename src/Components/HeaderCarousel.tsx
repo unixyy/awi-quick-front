@@ -46,7 +46,7 @@ export default function HeaderCarousel(props: CarouselProps) {
                 <div className="overflow-hidden relative h-56 sm:h-64 md:h-80 xl:h-96 rounded-t-lg">
                     {props.slides.map((image) => (
                         <Slide
-                            key={image.src}
+                            key={image.title}
                             title={image.title}
                             src={image.src}
                             alt={image.alt}

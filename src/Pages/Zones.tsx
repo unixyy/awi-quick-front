@@ -1,64 +1,58 @@
-import { useState, useEffect } from "react";
-import { TableData, TextBlock } from "../Components/Table";
-import { ZoneDto } from "../dto/zones.dto";
+import Table, {TextBlock, TableData} from "../Components/Table";
+import {useEffect, useState} from "react";
+import {ZoneDto} from "../dto/zones.dto";
 import routes from "../routes/routes";
-import DisplayPage from "./templates/DisplayPage";
 
-const images = [
-  {
-    title: "Slide 1",
-    src: "../front-bg/boardgone1.jpg",
-    alt: "Slide 1",
-  },
-  {
-    title: "Slide 2",
-    src: "../front-bg/boardgone2.jpg",
-    alt: "Slide 2",
-  },
-  {
-    title: "Slide 3",
-    src: "../front-bg/boardgone3.jpg",
-    alt: "Slide 3",
-  },
-  {
-    title: "Slide 4",
-    src: "../front-bg/boardgone4.jpg",
-    alt: "Slide 4",
-  },
-];
 
+interface ZoneData {
+  id: number;
+  name: string;
+  num : number;
+  src : string;
+  description : string;
+
+}
 const zoneCellFactory = (row: TableData) => {
-  const content = row as ZoneDto;
+  const content = row as ZoneData;
   return (
     <div className="bg-brown-palet rounded-lg shadow-lg p-6 m-4  flex flex-col">
-      <TextBlock content={content.name + " - " + content.number} />
+      <TextBlock content={content.name} />
+      <TextBlock content={content.num} />
     </div>
   );
 };
-
-export default function ZonePage() {
-  const [zones, setZones] = useState<ZoneDto[]>([]);
-  const [searchResult, setSearchResult] = useState<ZoneDto[]>([]);
+export default function Zones() {
+  const [zones,setZones] = useState<ZoneDto[]>([]);
+  const [searchResult,setSearchResult] = useState<ZoneDto[]>([]);
 
   useEffect(() => {
     fetch(routes.zoneRoot)
       .then((response) => response.json())
       .then((data) => {
-        setZones(data);
-        setSearchResult(data);
+        setZones(data)
       });
   }, []);
 
   function handleSearch(event: React.ChangeEvent<HTMLInputElement>) {
-    // TODO
+    const search = event.target.value;
+    const result = zones.filter((zone) => zone.name.toLowerCase().includes(search.toLowerCase()));
+    setSearchResult(result);
   }
+
   return (
-    <DisplayPage
-      title={"Zones"}
-      images={images}
-      searchResult={searchResult}
-      handleSearch={handleSearch}
-      entityCellFactory={zoneCellFactory}
-    />
+    <div>
+      <div className="flex ml-10 md:ml-20 mb-6 md:mb-10 maroon-palet font-bold text-6xl mr-auto" >Zones</div>
+      <input type="text"
+             className="p-2 w-64 rounded-lg bg-white text-gray-800 focus:outline-none focus:shadow-outline flex-grow"
+             placeholder="Search"
+             onChange={handleSearch}
+      />
+
+      <Table
+        data={searchResult}
+        elementPerPage={9}
+        cellFactory={zoneCellFactory}
+      />
+    </div>
   );
 }

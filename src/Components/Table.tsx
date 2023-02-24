@@ -22,7 +22,7 @@ export interface TableData {
 }
 
 export const TextBlock = (content: CellContent) => (
-    <div className="px-4 py-2">{content.content}</div>
+    <div className="px-4 py-2 text-white">{content.content}</div>
 );
 
 export default function Table(props: TableProps) {
