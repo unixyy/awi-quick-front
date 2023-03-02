@@ -1,31 +1,25 @@
 import { useState, useEffect } from "react";
-import { TableData, TextBlock } from "../Components/Table";
+import { TextBlock } from "../Components/ContentView";
 import { GameDto } from "../dto/games.dto";
-import routes from "../routes/routes";
+import { gameRoot } from "../routes/routes";
 import DisplayPage from "./templates/DisplayPage";
+import TitleTextOverImage from "../Components/Primary/TitleTextOverImage";
 
-
-
-const gameCellFactory = (row: TableData) => {
-  const content = row as GameDto;
-  return (
-    <div className="bg-brown-palet rounded-lg shadow-lg p-6 m-4  flex flex-col">
-      <TextBlock content={content.id} />
-      <TextBlock content={content.name} />
-      <TextBlock content={content.type} />
-      {content.zones && <TextBlock content={content.zones.join(", ")} />}
-    </div>
-  );
-};
+const gameCellFactory = (content: GameDto) => (
+  <div className="bg-brown-palet rounded-lg shadow-lg p-6 sm:m-2 md:m-4 flex flex-col">
+    <TextBlock content={content.name} />
+    <TextBlock content={content.type} />
+    {content.zones && <TextBlock content={content.zones.join(", ")} />}
+  </div>
+);
 
 export default function GamePage() {
-
   const [games, setGames] = useState<GameDto[]>([]);
   const [searchResult, setSearchResult] = useState<GameDto[]>([]);
   const src = "../front-bg/boardgame1.webp";
 
   useEffect(() => {
-    fetch(routes.gameRoot)
+    fetch(gameRoot)
       .then((response) => response.json())
       .then((data) => {
         setGames(data);
@@ -45,14 +39,11 @@ export default function GamePage() {
   }
   return (
     <div>
-      <div className={"w3-container"}>
-      <img title={"Board Game"} src={src} alt="Board Game" className=" w-full h-[calc(80vh-10rem)] object-cover rounded-t-lg pointer-events-none" />
-        <div className={"w3-centered text-6xl"}>Games</div>
-      </div>
+      <TitleTextOverImage src={src} text="Games" />
       <DisplayPage
         searchResult={searchResult}
         handleSearch={handleSearch}
-        entityCellFactory={gameCellFactory}
+        entityFactory={gameCellFactory}
       />
     </div>
   );

@@ -1,21 +1,28 @@
-import React from "react";
+import React, { Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
-import {createBrowserRouter, Navigate, RouterProvider} from "react-router-dom";
+import {
+  createBrowserRouter,
+  Navigate,
+  RouterProvider,
+} from "react-router-dom";
 import "./index.css";
-import Home from "./Pages/Home";
-import Games from "./Pages/Games";
-import Zones from "./Pages/Zones";
-import Manage from "./Pages/Admin/Manage";
-import Signin from "./Pages/Signin";
-import Error from "./Pages/Error";
-import {isLoggedIn} from "./Middlewares/auth";
-import ManageGames from "./Pages/Admin/ManageGames";
-import ManageZones from "./Pages/Admin/ManageZones";
-import ManageMenu from "./Pages/Admin/ManageMenu";
-import ManageVolunteers from "./Pages/Admin/ManageVolunteers";
 import axios from "axios";
 import Cookies from "js-cookie";
+import { isLoggedIn } from "./Middlewares/auth";
+const Home = React.lazy(() => import("./Pages/Home"));
+const Games = React.lazy(() => import("./Pages/Games"));
+const Zones = React.lazy(() => import("./Pages/Zones"));
+const Manage = React.lazy(() => import("./Pages/Admin/Manage"));
+const Signin = React.lazy(() => import("./Pages/Signin"));
+const Error = React.lazy(() => import("./Pages/Error"));
+const ManageGames = React.lazy(() => import("./Pages/Admin/ManageGames"));
+const ManageZones = React.lazy(() => import("./Pages/Admin/ManageZones"));
+const ManageMenu = React.lazy(() => import("./Pages/Admin/ManageMenu"));
+const ManageVolunteers = React.lazy(
+  () => import("./Pages/Admin/ManageVolunteers"),
+);
+const Zone = React.lazy(() => import("./Pages/Zone"));
 
 const Spinner = (
   <div
@@ -47,12 +54,16 @@ const router = createBrowserRouter([
         element: <Zones />,
       },
       {
+        path: "/zones/:id",
+        element: <Zone />,
+      },
+      {
         path: "/manage",
         element: isLoggedIn() ? <Manage /> : <Navigate to={"/signin"} />,
         children: [
           {
             path: "/manage",
-            element: <ManageMenu/>,
+            element: <ManageMenu />,
           },
           {
             path: "/manage/games",
@@ -65,7 +76,7 @@ const router = createBrowserRouter([
           {
             path: "/manage/volunteers",
             element: <ManageVolunteers />,
-          }
+          },
         ],
       },
       {
@@ -78,6 +89,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <RouterProvider router={router} fallbackElement={Spinner} />
+    <Suspense fallback={Spinner}>
+      <RouterProvider router={router} fallbackElement={Spinner} />
+    </Suspense>
   </React.StrictMode>,
 );

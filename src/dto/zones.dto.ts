@@ -1,8 +1,17 @@
-import { TableData } from "../Components/Table";
+export interface TableDto {
+  id: number;
+}
 
-export interface ZoneDto extends TableData {
+export interface RoomDto {
   id: string;
   name: string;
-  number: number;
-  src: string;
+  tables: TableDto[];
+};
+
+export interface ZoneDto extends TableDto {
+  id: number;
+  name: string;
+  rooms: RoomDto[];
+  src?: string;
+  description?: string;
 }

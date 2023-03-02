@@ -1,31 +1,14 @@
-// const root = process.env.API_URL;
-const root = "http://localhost:3000/"
+const root = process.env.API_URL;
 
-const gameRoot = root + "game/";
-const gameUrl = (id: string) => gameRoot + id;
-const gamesByName = (name: string) => gameRoot + "name/" + name;
-const gamesByType = (type: string) => gameRoot + "type/" + type;
-const gameByZone = (zoneId: number, zoneNumber?: number) =>
+export const gameRoot = root + "game/";
+export const gameById = (id: string) => gameRoot + id;
+export const gamesByName = (name: string) => gameRoot + "name/" + name;
+export const gamesByType = (type: string) => gameRoot + "type/" + type;
+export const gameByZone = (zoneId: number, zoneNumber?: number) =>
   gameRoot + "zone/" + zoneId + (zoneNumber ? "/" + zoneNumber : "");
-const zoneRoot = root + "zone/";
-const authRoot = root + "auth/";
-const signInRoot = authRoot + "signin";
-const volunteerRoot = root + "volunteer/";
-const volunteerByZone = (zoneId: number) => volunteerRoot + zoneId;
-
-const routes = {
-  root,
-  gameRoot,
-  gameUrl,
-  gamesByName,
-  gamesByType,
-  gameByZone,
-  zoneRoot,
-  authRoot,
-  signInRoot,
-  volunteerRoot,
-  volunteerByZone,
-
-};
-
-export default routes;
+export const zoneRoot = root + "zone/";
+export const zoneById = (id: number) => zoneRoot + id;
+export const authRoot = root + "auth/";
+export const signInRoot = authRoot + "signin";
+export const volunteerRoot = root + "volunteer/";
+export const volunteerByZone = (zoneId: number) => volunteerRoot + zoneId;
