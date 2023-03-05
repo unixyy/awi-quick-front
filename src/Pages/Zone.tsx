@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { zoneById } from "../routes/routes";
 import { ZoneDto } from "../dto/zones.dto";
+import axios from "axios";
 
 const defaultZone: ZoneDto = {
   id: 0,
@@ -14,9 +15,11 @@ export default function Zone() {
   const [zone, setZone] = useState<ZoneDto>(defaultZone);
 
   useEffect(() => {
-    fetch(zoneById(Number(params.id)))
-      .then((response) => response.json())
-      .then((data) => setZone(data));
+    axios.get(zoneById(Number(params.zoneId)))
+      .then((response) => {
+        setZone(response.data);
+      }
+    );
   }, [params.id]);
 
   return (

@@ -10,9 +10,11 @@ import "./index.css";
 import axios from "axios";
 import Cookies from "js-cookie";
 import {getIsAdmin, isLoggedIn} from "./Middlewares/auth";
+
 const Home = React.lazy(() => import("./Pages/Home"));
 const Games = React.lazy(() => import("./Pages/Games"));
 const Zones = React.lazy(() => import("./Pages/Zones"));
+const ZoneMenu = React.lazy(() => import("./Pages/ZoneMenu"));
 const Manage = React.lazy(() => import("./Pages/Admin/Manage"));
 const Signin = React.lazy(() => import("./Pages/Signin"));
 const Profile = React.lazy(() => import("./Pages/Profile"));
@@ -51,6 +53,16 @@ const router = createBrowserRouter([
       {
         path: "/zones",
         element: <Zones />,
+        children: [
+          {
+            path: "/zones",
+            element: <ZoneMenu />,
+          },
+          {
+            path: "/zones/:zoneId",
+            element: <Zone />,
+          },
+        ],
       },
       {
         path: "/manage",
