@@ -1,10 +1,11 @@
 import {useEffect, useState} from "react";
 import Editor from "./Editor";
+import {Navigate} from "react-router-dom";
 
 interface PageProps {
   searchResult: any[];
   handleSearch: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  handleSubmit: (data : any) => void;
+  handleSubmit: (olddata : any,newdata : any) => void;
   names : string[];
 }
 
@@ -15,8 +16,11 @@ export default function ManagePage(props : PageProps){
 
 
   const handleEdit = (event : React.MouseEvent<HTMLButtonElement>) => {
+
     event.preventDefault();
+    window.scrollTo(0, 0);
     setUUID(event.currentTarget.value);
+    console.log(event.currentTarget.value)
     setData(props.searchResult.find((entity : any) => entity.id == event.currentTarget.value));
     setEditorActive(true);
   }
@@ -44,7 +48,7 @@ export default function ManagePage(props : PageProps){
           <tr className={""}>
             {props.names.map((key : string) => {
               return (
-                <th className={"font-medium p-4 pl-8"}>
+                <th key={key} className={"font-medium p-4 pl-8"}>
                   {key}
                 </th>
               )
@@ -61,23 +65,24 @@ export default function ManagePage(props : PageProps){
         <tbody className={"rounded-lg"}>
           {props.searchResult.map((entity : typeof props.searchResult[0]) => {
             return (
-              <tr className={"rounded-lg"}>
+              <tr key={entity.id} className={"rounded-lg"}>
                 {props.names.map((key : string) => {
                   if (typeof entity[key] === "boolean") {
                     return (
-                      <td className={"p-4 pl-8"}>
+                      <td key={key} className={"p-4 pl-8"}>
                         {entity[key] ? "Yes" : "No"}
                       </td>
                     )
                   }else {
                     return (
 
-                      <td className={"p-4 pl-8"}>
+                      <td key={key} className={"p-4 pl-8"}>
                         {entity[key]}
                       </td>
                     )
                   }
-                })}
+                })
+                }
                 <td className={"p-4 pl-1"}>
                   <button className={"bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"} value={entity.id} onClick={handleEdit}>
                     Edit

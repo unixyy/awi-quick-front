@@ -2,40 +2,52 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { gameRoot } from "../../routes/routes";
 import { GameDto } from "../../dto/games.dto";
+import ManagePage from "../templates/ManagePage";
+import {volunteerDto} from "../../dto/volunteer.dto";
 
 export default function ManageGames() {
   const [games, setGames] = useState([]);
+  const [searchResult,setSearchResult] = useState([]);
+  const keyofGames = ["id","name","type"];
 
   useEffect(() => {
-    fetch(gameRoot)
-      .then((response) => response.json())
-      .then((response) => setGames(response.data));
+    axios.get(gameRoot)
+      .then((response) => {
+        setGames(response.data);
+        setSearchResult(response.data);
+      }
+    );
   });
+
+  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const search = event.target.value;
+    const result = games.filter((entity: GameDto) => {
+      return (
+        entity.name.toLowerCase().includes(search.toLowerCase()) ||
+        entity.type.toLowerCase().includes(search.toLowerCase())
+      );
+    });
+    setSearchResult(result);
+  };
+
+  // TODO : Fix this
+  const handleSubmit = (olddata: GameDto,newdata:GameDto) => {
+    axios.put(gameRoot,newdata)
+      .then((response) => {
+        console.log(response);
+      })
+  }
+
   return (
     <div>
       <div className="flex ml-10 md:ml-20 mb-6 md:mb-10 maroon-palet font-bold text-6xl mr-auto">
         Manage Games
       </div>
-      <table className={"bg-emerald-400"}>
-        <thead className={"border"}>
-          <tr className={""}>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Zones</th>
-          </tr>
-        </thead>
-        <tbody>
-          {games.map((game: GameDto) => (
-            <tr key={game.id} className={"border space-x-4"}>
-              <td className={"justify-start"}>{game.id}</td>
-              <td>{game.name}</td>
-              <td>{game.type}</td>
-              <td>{game.zones}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <ManagePage searchResult={games}
+                  handleSearch={handleSearch}
+                  names={keyofGames}
+                  handleSubmit={handleSubmit}
+      />
     </div>
   );
 }

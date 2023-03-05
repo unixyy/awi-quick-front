@@ -31,8 +31,9 @@ export default function ManageVolunteers() {
     setSearchResult(result);
   };
 
-  const handleSubmit = (data: volunteerDto) => {
-    axios.put(volunteerRoot, data)
+  // TODO : Fix this
+  const handleSubmit = (olddata: volunteerDto,newdata:volunteerDto) => {
+    axios.put(volunteerRoot, newdata)
       .then((response) => {
         console.log(response);
       })

@@ -1,8 +1,7 @@
 import {useEffect, useState} from "react";
-import {log} from "util";
 
 export interface EditorProps {
-  onSubmit : (data : any) => void;
+  onSubmit : (olddata : any,newdata : any) => void;
   id : string;
   data : any;
   type : any;
@@ -14,7 +13,7 @@ export default function Editor(props : EditorProps) {
 
   useEffect(() => {
     setData(props.data);
-  },[])
+  },[props.data])
 
 
   const handleChange = (event : React.ChangeEvent<HTMLInputElement>) => {
@@ -31,7 +30,7 @@ export default function Editor(props : EditorProps) {
 
   const handleSubmit = (event : React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    props.onSubmit(data);
+    props.onSubmit(props.data,data);
   }
 
   return (
@@ -42,22 +41,21 @@ export default function Editor(props : EditorProps) {
           Object.entries(data).map((prop : typeof props.type) => {
             if (typeof prop[1] === "boolean") {
               return (
-                <div className={"my-5 space-x-5"}>
+                <div key={prop[0]} className={"my-5 space-x-5"}>
                   <label>{prop[0]}</label>
                   <input className={"dark:bg-white"} type={"checkbox"} name={prop[0]} checked={prop[1]} onChange={handleCheckBox}/>
                 </div>
               )
             }else if (typeof prop[1] === "string") {
               return (
-                <div className={"flex flex-col my-5"}>
+                <div key={prop[0]} className={"flex flex-col my-5"}>
                   <label>{prop[0]}</label>
                   <input className={"w-64 dark:bg-white"} type={"text"} name={prop[0]} value={prop[1]} onChange={handleChange}/>
                 </div>
               )
-            }
-            else if (typeof prop[1] === "number") {
+            }else if (typeof prop[1] === "number") {
               return (
-                <div className={"flex flex-col my-5"}>
+                <div key={prop[0]} className={"flex flex-col my-5"}>
                   <label>{prop[0]}</label>
                   <input className={"w-64 dark:bg-white"} type={"number"} name={prop[0]} value={prop[1]} onChange={handleChange}/>
                 </div>
