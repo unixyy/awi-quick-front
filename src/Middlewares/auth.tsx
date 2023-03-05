@@ -10,7 +10,15 @@ interface Payload {
 }
 
 export function isLoggedIn() {
-  return getToken() != undefined;
+  if (typeof Cookies.get('token') !== 'undefined') {
+    if (Cookies.get('token') === 'undefined') {
+      Cookies.remove("token")
+      return false;
+    }
+    return true;
+  }else{
+    return false;
+  }
 }
 
 export function signOut() {

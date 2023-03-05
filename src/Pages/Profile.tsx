@@ -20,8 +20,23 @@ export default function Profile() {
   const [loaded, setLoaded] = useState(false);
 
 
-  const handleSubmit = (data: volunteerDto) => {
-    axios.put(volunteerByUUID(getSub()), data)
+  const handleSubmit = (oldata:volunteer,newdata: volunteer) => {
+    const sentData : any = {...newdata};
+    delete sentData.id;
+    if (oldata.username !== newdata.username) {
+      console.log(oldata.username, newdata.username)
+      alert("You cannot change your username");
+      return;
+    }else{
+      delete sentData.username;
+    }
+    if (oldata.email == newdata.email) {
+      delete sentData.email;
+    }
+
+    console.log(sentData)
+
+    axios.put(volunteerByUUID(getSub()), sentData)
       .then((response) => {
         console.log(response);
         Cookies.set("token", response.data.token)

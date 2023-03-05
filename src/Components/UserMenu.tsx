@@ -20,7 +20,7 @@ const StylizedMenuLink = (props: LinkProps) => {
   return (
     <Link
       to={props.to}
-      className="block px-4 py-2 text-sm hover:bg-gray-600 text-gray-200 hover:text-white"
+      className="block w-20 px-1 py-2 text-sm text-gray-200 hover:text-white"
     >
       {props.text}
     </Link>
@@ -28,19 +28,8 @@ const StylizedMenuLink = (props: LinkProps) => {
 };
 
 export default function UserMenu() {
-  const [loggedIn, setLoggedIn] = useState(false);
-
-  useEffect(() => {
-    setLoggedIn(isLoggedIn());
-    }, [loggedIn])
 
   const navigate = useNavigate();
-  const logout = () => {
-    signOut();
-    setLoggedIn(false);
-    location.reload();
-    navigate("/signin");
-  }
 
   const user = {username :getUsername(), email: getEmail()}
   const toggle = () => {
@@ -72,6 +61,12 @@ export default function UserMenu() {
         menu.classList.add("hidden");
       }
     }
+  }
+  const logout = () => {
+    dropdownToggle();
+    signOut();
+    location.reload();
+    navigate("/signin");
   }
 
   const [isToggled, setToggled] = useState(false);
@@ -113,13 +108,20 @@ export default function UserMenu() {
               aria-labelledby="user-menu-button"
             >
               <li>
-                <StylizedMenuLink
-                  to="/profile"
-                  text="My profile"
-                />
+                <button  onClick={() => {dropdownToggle();}}>
+                  <StylizedMenuLink
+                    to="/profile"
+                    text="My profile"
+                  />
+                </button>
               </li>
               <li>
-                <button type={"button"} className="block px-4 py-2 text-sm hover:bg-gray-600 text-gray-200 hover:text-white" onClick={logout} > Sign Out </button>
+                <button type={"button"} className="" onClick={logout} >
+                  <StylizedMenuLink
+                    to="/"
+                    text="Sign out"
+                  />
+                </button>
               </li>
             </ul>
           </div>
