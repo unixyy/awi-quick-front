@@ -1,14 +1,15 @@
 export interface TableDto {
   id: number;
+  number: number;
 }
 
 export interface RoomDto {
-  id: string;
+  id: number;
   name: string;
   tables: TableDto[];
 };
 
-export interface ZoneDto extends TableDto {
+export interface ZoneDto {
   id: number;
   name: string;
   rooms: RoomDto[];
