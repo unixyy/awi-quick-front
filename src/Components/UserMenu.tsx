@@ -62,7 +62,20 @@ export default function UserMenu() {
       }
     }
   };
+
+  const dropdownToggle = () => {
+    const menu = document.getElementById("user-dropdown");
+    if (menu) {
+      if (menu.classList.contains("hidden")) {
+        menu.classList.remove("hidden");
+      } else {
+        menu.classList.add("hidden");
+      }
+    }
+  }
+
   const [isToggled, setToggled] = useState(false);
+
   const userInfo = {
     name: user.username,
     email: user.email,
@@ -76,8 +89,7 @@ export default function UserMenu() {
             className="flex text-sm bg-maroon-palet rounded-full md:mr-0 p-0"
             id="user-menu-button"
             aria-expanded="false"
-            data-dropdown-toggle="user-dropdown"
-            data-dropdown-placement="bottom"
+            onClick={dropdownToggle}
           >
                                     <span className="sr-only">
                                         Open user menu

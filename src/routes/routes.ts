@@ -12,3 +12,4 @@ export const authRoot = root + "auth/";
 export const signInRoot = authRoot + "signin";
 export const volunteerRoot = root + "volunteer/";
 export const volunteerByZone = (zoneId: number) => volunteerRoot + zoneId;
+export const volunteerByUUID = (uuid: string) => volunteerRoot + uuid;

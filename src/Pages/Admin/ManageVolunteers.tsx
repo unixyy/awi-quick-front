@@ -2,14 +2,18 @@ import { useEffect, useState } from "react";
 import { volunteerRoot } from "../../routes/routes";
 import ManagePage from "../templates/ManagePage";
 import { volunteerDto } from "../../dto/volunteer.dto";
+import axios from "axios";
 
 export default function ManageVolunteers() {
-  const [volunteers, setVolunteers] = useState([]);
-  const [searchResult, setSearchResult] = useState([]);
+  const [volunteers,setVolunteers] = useState([])
+  const [searchResult, setSearchResult] = useState([])
+  const keyofVolunteer = ["id","username","email","isAdmin"]
+
 
   useEffect(() => {
-    fetch(volunteerRoot)
-      .then((response) => response.json())
+    axios.get(volunteerRoot, {
+      method: "GET",
+    })
       .then((response) => {
         setVolunteers(response.data);
         setSearchResult(response.data);
@@ -27,9 +31,20 @@ export default function ManageVolunteers() {
     setSearchResult(result);
   };
 
+  const handleSubmit = (data: volunteerDto) => {
+    axios.put(volunteerRoot, data)
+      .then((response) => {
+        console.log(response);
+      })
+  }
+
   return (
-    <div>
-      <ManagePage searchResult={searchResult} handleSearch={handleSearch} />
-    </div>
-  );
+    <>
+      <div className="flex ml-10 md:ml-20 mb-6 md:mb-10 maroon-palet font-bold text-6xl mr-auto" >Manage Volunteers</div>
+      <ManagePage searchResult={searchResult}
+                  handleSearch={handleSearch}
+                  handleSubmit={handleSubmit}
+                  names={keyofVolunteer}/>
+    </>
+  )
 }

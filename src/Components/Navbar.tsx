@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import UserMenu from "./UserMenu";
-import {isLoggedIn} from "../Middlewares/auth";
+import {getIsAdmin, isLoggedIn} from "../Middlewares/auth";
 
 interface LinkProps {
     className?: string;
@@ -37,7 +37,7 @@ const StylizedButton = (props: LinkProps) => {
 export default function Navbar() {
 
     return (
-        <nav className="p-3 rounded-xl bg-maroon-palet border-emerald-700 px-10 sm:px-4 py-2.5 mb-10">
+        <nav className="p-3 rounded-xl bg-maroon-palet border-emerald-700 px-10 sm:px-4 py-2.5 mb-5">
             <div
                 id="principal"
                 className="container flex flex-row flex-wrap md:mx-5 items-center justify-between max-md:ml-auto max-md:mr-auto"
@@ -71,9 +71,9 @@ export default function Navbar() {
                                 size="text-xl max-md:text-3xl"
                             />
                         </li>
-                        {isLoggedIn() ? <StylizedLink
+                        {getIsAdmin() ? <StylizedLink
                           to="/manage"
-                          text="Gestion"
+                          text="Manage"
                           size="text-xl max-md:text-3xl"
                         /> : null}
                         { isLoggedIn() ? null : <StylizedLink to="/signin" text="Sign In" size="text-xl max-md:text-3xl"/> }

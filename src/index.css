@@ -176,3 +176,19 @@ ul {
     color: white;
 }
 
+
+tr {
+    text-align: left;
+}
+
+tbody > tr {
+    background-color: #c1c1c1;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+label {
+    text-align: left;
+}

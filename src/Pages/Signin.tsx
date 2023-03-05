@@ -46,7 +46,7 @@ export default function Signin() {
             </label>
             <input
               type="email"
-              className="rounded text-black"
+              className="rounded dark:text-white p-2 w-48"
               name="email"
               id="email"
               onChange={handleChange}
@@ -58,7 +58,7 @@ export default function Signin() {
             </label>
             <input
               type="password"
-              className="rounded text-black"
+              className="rounded dark:text-white p-2 w-48"
               name="password"
               id="password"
               onChange={handleChange}

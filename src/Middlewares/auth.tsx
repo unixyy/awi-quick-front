@@ -10,7 +10,7 @@ interface Payload {
 }
 
 export function isLoggedIn() {
-  return Cookies.get("token") != undefined;
+  return getToken() != undefined;
 }
 
 export function signOut() {
@@ -22,6 +22,7 @@ export function getToken() {
 }
 
 export function decodeToken(){
+  if(!isLoggedIn()) return undefined;
   const token = Cookies.get("token");
   if (token) {
       const decoded = jwt_decode(token) as Payload;
@@ -30,6 +31,7 @@ export function decodeToken(){
 }
 
 export function getEmail() {
+  if(!isLoggedIn()) return undefined;
   const token = decodeToken();
   if (token) {
     return token.email;
@@ -37,6 +39,7 @@ export function getEmail() {
 }
 
 export function getUsername() {
+  if(!isLoggedIn()) return undefined;
   const token = decodeToken();
   if (token) {
     return token.username;
@@ -44,13 +47,17 @@ export function getUsername() {
 }
 
 export function getSub() {
+  if(!isLoggedIn()) return "";
   const token = decodeToken();
   if (token) {
     return token.sub;
+  }else{
+    return "";
   }
 }
 
 export function getIsAdmin() {
+  if(!isLoggedIn()) return false;
   const token = decodeToken();
   if (token) {
     return token.isAdmin;
