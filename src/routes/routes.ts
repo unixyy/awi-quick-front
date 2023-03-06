@@ -20,7 +20,7 @@ export const signInRoot = authRoot + "signin";
 export const volunteerRoot = root + "volunteer/";
 export const volunteerByUUID = (uuid: string) => volunteerRoot + uuid;
 export const timeslotRoot = root + "timeslot/";
-export const volunteersByZone = (id: string) =>
+export const assignmentForVolunteer = (id: string) =>
   volunteerRoot + id + "/assignments";
 export const assignVolunteerToRoom = (id: string, roomId: number) =>
   volunteerByUUID(id) + "/assign/" + roomId;

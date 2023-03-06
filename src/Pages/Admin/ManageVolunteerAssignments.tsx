@@ -7,7 +7,7 @@ import {
   volunteerRoot,
   roomRoot,
   timeslotRoot,
-  volunteersByZone,
+  assignmentForVolunteer,
   assignVolunteerToRoom,
   unassignVolunteerFromRoom,
 } from "../../routes/routes";
@@ -59,7 +59,7 @@ export default function AssignmentForm() {
 
   const handleVolunteerChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setVolunteerId(e.target.value);
-    axios.get(volunteersByZone(e.target.value)).then((res) => {
+    axios.get(assignmentForVolunteer(e.target.value)).then((res) => {
       const assignments: AssignmentByZoneDto[] = res.data;
       const updatedTimeslots = timeslots.map((timeslot) => {
         const assignment = assignments.find((assignment) =>
@@ -82,11 +82,11 @@ export default function AssignmentForm() {
     timeslot: AssignmentTimeslotDto,
     index: number,
   ) => {
-    const alreadyChanged = toggleTimeslots.has(timeslot.id);
     const timeslotsToToggle = new Map(toggleTimeslots);
     const updatedTimeslots = [...timeslots];
     updatedTimeslots[index] = { ...timeslot, checked: !timeslot.checked };
     setTimeslots(updatedTimeslots);
+    const alreadyChanged = toggleTimeslots.has(timeslot.id);
     alreadyChanged
       ? timeslotsToToggle.delete(timeslot.id)
       : timeslotsToToggle.set(timeslot.id, !timeslot.checked);
