@@ -1,13 +1,21 @@
 import { useEffect, useState } from "react";
-import { volunteerRoot } from "../../routes/routes";
+import {volunteerByUUID, volunteerRoot} from "../../routes/routes";
 import ManagePage from "../templates/ManagePage";
 import { volunteerDto } from "../../dto/volunteer.dto";
 import axios from "axios";
 
+interface volunteer extends volunteerDto {
+  id: string;
+  username: string;
+  email: string;
+  isAdmin: boolean;
+
+}
 export default function ManageVolunteers() {
+  const [updated,setUpdated] = useState(false)
   const [volunteers,setVolunteers] = useState([])
   const [searchResult, setSearchResult] = useState([])
-  const keyofVolunteer = ["id","username","email","isAdmin"]
+  const keyofVolunteer = ["id","username","firstName","lastName","email","isAdmin"]
 
 
   useEffect(() => {
@@ -18,7 +26,7 @@ export default function ManageVolunteers() {
         setVolunteers(response.data);
         setSearchResult(response.data);
       });
-  }, []);
+  }, [updated]);
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     const search = event.target.value;
@@ -32,11 +40,32 @@ export default function ManageVolunteers() {
   };
 
   // TODO : Fix this
-  const handleSubmit = (olddata: volunteerDto,newdata:volunteerDto) => {
-    axios.put(volunteerRoot, newdata)
+  const handleSubmit = (olddata: volunteer,newdata:volunteer) => {
+    const sentData : any = {...newdata}
+    delete sentData.id
+    if(olddata.email === newdata.email) {
+      delete sentData.email
+    }
+    if(olddata.username === newdata.username) {
+      delete sentData.username
+    }
+    if(olddata.isAdmin === newdata.isAdmin) {
+      delete sentData.isAdmin
+    }
+    if (olddata.firstName === newdata.firstName) {
+      delete sentData.firstName
+    }
+    if (olddata.lastName === newdata.lastName) {
+      delete sentData.lastName
+    }
+
+
+    axios.put(volunteerByUUID(olddata.id), sentData)
       .then((response) => {
-        console.log(response);
       })
+
+    setUpdated(!updated)
+
   }
 
   return (

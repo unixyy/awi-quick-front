@@ -23,6 +23,7 @@ const ManageGames = React.lazy(() => import("./Pages/Admin/ManageGames"));
 const ManageZones = React.lazy(() => import("./Pages/Admin/ManageZones"));
 const ManageMenu = React.lazy(() => import("./Pages/Admin/ManageMenu"));
 const ManageVolunteers = React.lazy(() => import("./Pages/Admin/ManageVolunteers"));
+const ManageGameAssign = React.lazy(() => import("./Pages/Admin/ManageGameAssignement"));
 const Zone = React.lazy(() => import("./Pages/Zone"));
 
 const Spinner = (
@@ -30,7 +31,6 @@ const Spinner = (
     className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full text-red-500"
     role="status"
   >
-    <span className="visually-hidden">Loading...</span>
   </div>
 );
 
@@ -84,6 +84,10 @@ const router = createBrowserRouter([
             path: "/manage/volunteers",
             element: <ManageVolunteers />,
           },
+          {
+            path:"/manage/AssignGame",
+            element: <ManageGameAssign />
+          }
         ],
       },
       {

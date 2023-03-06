@@ -20,7 +20,6 @@ export default function ManagePage(props : PageProps){
     event.preventDefault();
     window.scrollTo(0, 0);
     setUUID(event.currentTarget.value);
-    console.log(event.currentTarget.value)
     setData(props.searchResult.find((entity : any) => entity.id == event.currentTarget.value));
     setEditorActive(true);
   }

@@ -8,8 +8,3 @@ export interface GameDto extends TableData {
   image?: string;
   description?: string;
 }
-
-export interface GameWithZoneDto extends GameDto {
-  zoneId: number;
-  zoneNumber: number;
-}

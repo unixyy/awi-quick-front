@@ -20,17 +20,17 @@ export default function Profile() {
   const [loaded, setLoaded] = useState(false);
 
 
-  const handleSubmit = (oldata:volunteer,newdata: volunteer) => {
+  const handleSubmit = (olddata:volunteer,newdata: volunteer) => {
     const sentData : any = {...newdata};
     delete sentData.id;
-    if (oldata.username !== newdata.username) {
-      console.log(oldata.username, newdata.username)
+    if (olddata.username !== newdata.username) {
+      console.log(olddata.username, newdata.username)
       alert("You cannot change your username");
       return;
     }else{
       delete sentData.username;
     }
-    if (oldata.email == newdata.email) {
+    if (olddata.email == newdata.email) {
       delete sentData.email;
     }
 

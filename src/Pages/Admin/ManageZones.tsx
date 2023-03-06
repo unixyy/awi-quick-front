@@ -124,7 +124,9 @@ export default function ZoneForm() {
   React.useEffect(() => {
     fetch(zoneRoot)
       .then((response) => response.json())
-      .then((data) => setZones(data));
+      .then((data) => {
+        setZones(data)
+      });
   }, []);
 
   return (
