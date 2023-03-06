@@ -7,7 +7,17 @@ export interface RoomDto {
   id: number;
   name: string;
   tables: TableDto[];
-};
+}
+
+export interface RoomAssignmentDto {
+  id: number;
+  name: string;
+  zone_id: number;
+  tables: TableDto[];
+  zone: {
+    name: string;
+  };
+}
 
 export interface ZoneDto {
   id: number;

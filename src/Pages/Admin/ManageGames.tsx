@@ -3,20 +3,17 @@ import axios from "axios";
 import { gameRoot } from "../../routes/routes";
 import { GameDto } from "../../dto/games.dto";
 import ManagePage from "../templates/ManagePage";
-import {volunteerDto} from "../../dto/volunteer.dto";
 
 export default function ManageGames() {
   const [games, setGames] = useState([]);
-  const [searchResult,setSearchResult] = useState([]);
-  const keyofGames = ["id","name","type"];
+  const [searchResult, setSearchResult] = useState([]);
+  const keyofGames = ["id", "name", "type"];
 
   useEffect(() => {
-    axios.get(gameRoot)
-      .then((response) => {
-        setGames(response.data);
-        setSearchResult(response.data);
-      }
-    );
+    axios.get(gameRoot).then((response) => {
+      setGames(response.data);
+      setSearchResult(response.data);
+    });
   });
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,22 +28,22 @@ export default function ManageGames() {
   };
 
   // TODO : Fix this
-  const handleSubmit = (olddata: GameDto,newdata:GameDto) => {
-    axios.put(gameRoot,newdata)
-      .then((response) => {
-        console.log(response);
-      })
-  }
+  const handleSubmit = (oldData: GameDto, newData: GameDto) => {
+    axios.put(gameRoot, newData).then((response) => {
+      console.log(response);
+    });
+  };
 
   return (
     <div>
       <div className="flex ml-10 md:ml-20 mb-6 md:mb-10 maroon-palet font-bold text-6xl mr-auto">
         Manage Games
       </div>
-      <ManagePage searchResult={games}
-                  handleSearch={handleSearch}
-                  names={keyofGames}
-                  handleSubmit={handleSubmit}
+      <ManagePage
+        searchResult={games}
+        handleSearch={handleSearch}
+        names={keyofGames}
+        handleSubmit={handleSubmit}
       />
     </div>
   );

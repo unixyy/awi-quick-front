@@ -204,3 +204,79 @@ tr:nth-child(even) {
 label {
     text-align: left;
 }
+
+.form-checkbox {
+  -webkit-appearance: none;
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+  display: inline-block;
+  vertical-align: middle;
+  background-origin: border-box;
+  user-select: none;
+  flex-shrink: 0;
+  height: 1em;
+  width: 1em;
+  color: currentColor;
+  background-color: #fcffe7;
+  border-color: #cbd5e0;
+  border-width: 1px;
+  border-radius: 0.25rem;
+  transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
+}
+
+.form-checkbox:checked {
+  background-color: #4299e1;
+  border-color: #4299e1;
+}
+
+.form-checkbox:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(90, 103, 216, 0.45);
+}
+
+.form-checkbox:disabled {
+  background-color: #c7ced9;
+  border-color: #c7ced9;
+  cursor: not-allowed;
+}
+
+.select {
+  position: relative;
+  display: inline-block;
+  margin: 1rem;
+}
+
+.select select {
+  appearance: none;
+  background-color: #fcffe7;
+  border: 1px solid #cbd5e0;
+  border-radius: 0.25rem;
+  padding: 0.5rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  color: #4a5568;
+  cursor: pointer;
+  outline: none;
+  width: 100%;
+  max-width: 20rem;
+}
+
+.select::after {
+  content: "▼";
+  position: absolute;
+  top: 50%;
+  right: 0.75rem;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: #4a5568;
+}
+
+/* Style for options */
+.select select option {
+  background-color: #fcffe7;
+  color: #4a5568;
+  border: none;
+}
