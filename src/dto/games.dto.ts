@@ -1,7 +1,7 @@
 import { TableData } from "../Components/ContentView";
 
 export interface GameDto extends TableData {
-  id: number;
+  id: string;
   name: string;
   type: string;
   zones?: string[];

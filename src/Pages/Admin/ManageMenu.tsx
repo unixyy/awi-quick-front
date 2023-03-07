@@ -54,25 +54,31 @@ export default function ManageMenu() {
         <li className={`px-4 py-2 w-80 lg:w-96 align-middle`}>
           <Link to={"/manage/games"}>
             <img src={gamesImg.src} className={"rounded-lg h-80"} alt={gamesImg.alt} />
-            <div className={"text-black"}>Games</div>
+            <div className={""}>Games</div>
           </Link>
         </li>
         <li className={`px-4 py-2 w-80 lg:w-96 align-middle`}>
           <Link to={"/manage/zones"}>
             <img src={zonesImg.src} className={"rounded-lg h-80"} alt={zonesImg.alt} />
-            <div className={"text-black"}>Zones</div>
+            <div className={""}>Zones</div>
           </Link>
         </li>
         <li className={`px-4 py-2 w-80 lg:w-96 align-middle`}>
           <Link to={"/manage/volunteers"}>
             <img src={volunteersImg.src} className={"rounded-lg h-80"} alt={volunteersImg.alt} />
-            <div className={"text-black"}>Volunteers</div>
+            <div className={""}>Volunteers</div>
           </Link>
         </li>
         <li className={`px-4 py-2 w-80 lg:w-96 align-middle`}>
           <Link to={"/manage/AssignGame"}>
             <img src={gamesImg.src} className={"rounded-lg h-80"} alt={gamesImg.alt} />
-            <div className={"text-black"}>Assign Game to a Zone</div>
+            <div className={""}>Assign Game to a Zone</div>
+          </Link>
+        </li>
+        <li className={`px-4 py-2 w-80 lg:w-96 align-middle`}>
+          <Link to={"/manage/AssignVolunteer"}>
+            <img src={volunteersImg.src} className={"rounded-lg h-80"} alt={volunteersImg.alt} />
+            <div className={""}>Assign Volunteer to a Game</div>
           </Link>
         </li>
       </ul>

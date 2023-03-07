@@ -90,7 +90,7 @@ const router = createBrowserRouter([
             element: <ManageGameAssign />
           },
           {
-            path: "/manage/volunteers-assignments",
+            path: "/manage/AssignVolunteer",
             element: <ManageVolunteerAssignments />
           }
         ],

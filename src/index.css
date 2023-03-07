@@ -28,8 +28,8 @@ input[type="text"].outlined:focus {
   width: 10fr;
 
   color-scheme: light dark;
-  color: rgb(0, 0, 0);
-  background-color: #fcffe7;
+  /*color: rgb(0, 0, 0);*/
+  /*background-color: #fcffe7;*/
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -203,6 +203,9 @@ tr:nth-child(even) {
 
 label {
     text-align: left;
+}
+.jus {
+  justify-content:center;
 }
 
 .form-checkbox {
