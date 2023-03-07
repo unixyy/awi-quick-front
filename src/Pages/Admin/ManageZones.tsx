@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Popup from "../../Components/Popup";
 import { RoomDto, ZoneDto } from "../../dto/zones.dto";
 import {
   addRoomToZone,
@@ -6,6 +7,7 @@ import {
   zoneRoot,
 } from "../../routes/routes";
 import axios from "axios";
+import { zoneById } from '../../routes/routes';
 
 const defaultZone: ZoneDto = {
   id: 0,
@@ -16,11 +18,13 @@ const defaultZone: ZoneDto = {
 export default function ZoneForm() {
   const [zones, setZones] = useState<ZoneDto[]>([]);
   const [chosenZone, setChosenZone] = useState<ZoneDto>(defaultZone);
+
   const [zoneUpdates, setZoneUpdates] = useState<{ [id: number]: ZoneDto }>({});
   const [roomUpdates, setRoomUpdates] = useState<{ [id: number]: RoomDto }>({});
   const [updatePending, setUpdatePending] = useState<boolean>(false);
 
   const [newRoomName, setNewRoomName] = useState<string>("");
+  const [updatedRoomName, setUpdatedRoomName] = useState<string>("");
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -41,8 +45,18 @@ export default function ZoneForm() {
     });
   };
 
-  const setName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNewRoomName(e.target.value);
+  const createNewRoom = () => {
+    axios
+      .post(zoneRoot, { name: newRoomName })
+      .then(() => {
+        setNewRoomName("");
+        return <Popup title="Zone created" success={true} />;
+      })
+      .catch(() => <Popup title="Zone creation failed" success={false} />);
+  };
+
+  const updateRoomName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setUpdatedRoomName(e.target.value);
     setUpdatePending(true);
   };
 
@@ -100,7 +114,7 @@ export default function ZoneForm() {
   const addRoom = () => {
     const updatedRooms = [...chosenZone.rooms];
     axios
-      .post(addRoomToZone(chosenZone.id), { name: newRoomName })
+      .post(addRoomToZone(chosenZone.id), { name: updatedRoomName })
       .then((response) => {
         const newRoom = response.data;
         updatedRooms.push(newRoom);
@@ -121,18 +135,48 @@ export default function ZoneForm() {
       .then(() => setChosenZone({ ...chosenZone, rooms: updatedRooms }));
   };
 
+  const removeZone = () => {
+    const remove = confirm("Are you sure you want to delete this zone?\nEvery assignments will be removed\nThis action cannot be undone");
+    if (!remove) return;
+    axios.delete(zoneById(chosenZone.id)).then(() => {
+      const newZones = zones.filter((zone) => zone.id !== chosenZone.id);
+      setZones(newZones);
+      setChosenZone(newZones[0]);
+    });
+  };
+
   React.useEffect(() => {
     fetch(zoneRoot)
       .then((response) => response.json())
       .then((data) => {
-        setZones(data)
+        setZones(data);
       });
   }, []);
 
+  console.log(chosenZone);
+
   return (
     <>
+      <div className="w-ful flex space-x-2 mb-4">
+        <input
+          type="text"
+          className="outlined"
+          placeholder="Enter the zone name"
+          onChange={(e) => setNewRoomName(e.target.value)}
+        />
+        <button
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          onClick={() => createNewRoom()}
+        >
+          Create zone
+        </button>
+      </div>
       <select
-        onChange={(e) => setChosenZone(zones[Number(e.target.value) - 1])}
+        onChange={(e) =>
+          setChosenZone(
+            zones.find((zone) => zone.id === parseInt(e.target.value))!,
+          )
+        }
       >
         <option value={undefined}>Choose a zone</option>
         {zones.map((zone) => (
@@ -191,7 +235,7 @@ export default function ZoneForm() {
                 type="text"
                 className="outlined"
                 placeholder="Enter the zone name"
-                onChange={(e) => setName(e)}
+                onChange={(e) => updateRoomName(e)}
               />
               <button
                 type="button"
@@ -199,6 +243,15 @@ export default function ZoneForm() {
                 onClick={() => addRoom()}
               >
                 Add Room
+              </button>
+            </div>
+            <div className="py-2 col-span-3">
+              <button
+                type="button"
+                className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                onClick={() => removeZone()}
+              >
+                Delete Zone
               </button>
             </div>
           </div>

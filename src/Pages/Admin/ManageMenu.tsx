@@ -81,6 +81,12 @@ export default function ManageMenu() {
             <div className={""}>Assign Volunteer to a Game</div>
           </Link>
         </li>
+        <li className="px-4 py-2 w-80 lg:w-96 align-middle">
+          <Link to="/manage/volunteers-assignments">
+            <img src={volunteersImg.src} className={"rounded-lg h-80"} alt={volunteersImg.alt} />
+            <div className={"text-black"}>Volunteer Assignments</div>
+          </Link>
+        </li>
       </ul>
     </div>
   );
