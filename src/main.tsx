@@ -17,6 +17,7 @@ const Zones = React.lazy(() => import("./Pages/Zones"));
 const ZoneMenu = React.lazy(() => import("./Pages/ZoneMenu"));
 const Manage = React.lazy(() => import("./Pages/Admin/Manage"));
 const Signin = React.lazy(() => import("./Pages/Signin"));
+const Signup = React.lazy(() => import("./Pages/Signup"));
 const Profile = React.lazy(() => import("./Pages/Profile"));
 const Error = React.lazy(() => import("./Pages/Error"));
 const ManageGames = React.lazy(() => import("./Pages/Admin/ManageGames"));
@@ -98,6 +99,10 @@ const router = createBrowserRouter([
       {
         path: "/signin",
         element: isLoggedIn() ? <Navigate to={"/"} /> : <Signin />,
+      },
+      {
+        path: "/signup",
+        element: isLoggedIn() ? <Navigate to={"/"} /> : <Signup />,
       },
       {
         path: "/profile",

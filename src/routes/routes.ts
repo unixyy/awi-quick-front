@@ -19,6 +19,7 @@ export const addTableToRoom = (id: number) =>
 export const removeTableFromRoom = (id: number) => "/table/" + id;
 export const authRoot = root + "/auth/";
 export const signInRoot = authRoot + "signin";
+export const signUpRoot = authRoot + "signup";
 export const volunteerRoot = root + "/volunteer/";
 export const volunteerByUUID = (uuid: string) => volunteerRoot + uuid;
 export const timeslotRoot = root + "/timeslot/";

@@ -1,8 +1,6 @@
 import {UserCircleIcon} from "@heroicons/react/24/outline";
-import Hamburger from "hamburger-react";
-import {useEffect, useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
-import {getEmail, getUsername, isLoggedIn, signOut} from "../Middlewares/auth";
+import {getEmail, getUsername, signOut} from "../Middlewares/auth";
 
 interface UserInfo {
   username: string;
@@ -32,25 +30,6 @@ export default function UserMenu() {
   const navigate = useNavigate();
 
   const user = {username :getUsername(), email: getEmail()}
-  const toggle = () => {
-    const menu = document.getElementById("mobile-menu-2");
-    const principal = document.getElementById("principal");
-    if (menu) {
-      if (menu.classList.contains("max-md:hidden")) {
-        menu.classList.remove("max-md:hidden");
-        setToggled(true);
-        if (principal) {
-          principal.classList.add("flex-wrap");
-        }
-      } else {
-        menu.classList.add("max-md:hidden");
-        setToggled(false);
-        if (principal) {
-          principal.classList.remove("flex-wrap");
-        }
-      }
-    }
-  };
 
   const dropdownToggle = () => {
     const menu = document.getElementById("user-dropdown");
@@ -68,8 +47,6 @@ export default function UserMenu() {
     location.reload();
     navigate("/signin");
   }
-
-  const [isToggled, setToggled] = useState(false);
 
   const userInfo = {
     name: user.username,
@@ -125,21 +102,6 @@ export default function UserMenu() {
               </li>
             </ul>
           </div>
-          <button
-            onClick={toggle}
-            type="button"
-            className="inline-flex items-center p-2 ml-1 text-sm text-white rounded-lg md:hidden"
-            aria-controls="mobile-menu-2"
-            aria-expanded="false"
-          >
-                                    <span className="sr-only">
-                                        Open main menu
-                                    </span>
-            <Hamburger
-              direction="right"
-              toggled={isToggled}
-            />
-          </button>
         </div>
       </li>
     </ul>
