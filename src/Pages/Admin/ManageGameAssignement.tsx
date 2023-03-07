@@ -4,7 +4,7 @@ import { GameDto } from "../../dto/games.dto";
 import {AssignGameZoneDto} from "../../dto/assignGameZone.dto";
 import {ZoneDto} from "../../dto/zones.dto";
 import {
-  gameByZone,
+  gamesByZone,
   gameRoot,
   GameZoneAssign,
   GameZoneUnassign,
@@ -38,7 +38,7 @@ export default function ManageGameAssignement() {
   const handleZoneChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setZoneId(e.target.value);
     axios
-      .get(gameByZone(parseInt(e.target.value)))
+      .get(gamesByZone(parseInt(e.target.value)))
       .then((res) => {
           const assignments: AssignGameZoneDto[] = res.data;
           setDisponibleRoom(assignments);

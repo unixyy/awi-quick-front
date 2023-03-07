@@ -4,19 +4,24 @@ import { GameDto } from "../dto/games.dto";
 import { gameRoot } from "../routes/routes";
 import DisplayPage from "./templates/DisplayPage";
 import TitleTextOverImage from "../Components/Primary/TitleTextOverImage";
+import { useNavigate } from "react-router-dom";
 
-const gameCellFactory = (content: GameDto) => (
-  <div className="bg-brown-palet rounded-lg shadow-lg p-6 sm:m-2 md:m-4 flex flex-col">
-    <TextBlock content={content.name} />
-    <TextBlock content={content.type} />
-    {content.zones && <TextBlock content={content.zones.join(", ")} />}
-  </div>
-);
 
 export default function GamePage() {
   const [games, setGames] = useState<GameDto[]>([]);
   const [searchResult, setSearchResult] = useState<GameDto[]>([]);
   const src = "../front-bg/boardgame1.webp";
+  const navigate = useNavigate();
+  const gameCellFactory = (game: GameDto) => (
+    <div
+      className="bg-brown-palet rounded-lg shadow-lg p-6 sm:m-2 md:m-4 flex flex-col cursor-pointer"
+      onClick={() => navigate(`/games/${game.id}`)}
+    >
+      <TextBlock content={game.name} />
+      <TextBlock content={game.type} />
+      {game.zones && <TextBlock content={game.zones.join(", ")} />}
+    </div>
+  );
 
   useEffect(() => {
     fetch(gameRoot)

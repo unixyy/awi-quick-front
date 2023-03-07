@@ -53,8 +53,11 @@ export default function AssignmentForm() {
     );
 
     Promise.all([adding, deleting])
-      .then(() => window.alert("Success!"))
-      .catch(() => window.alert("Error!"));
+      .then(() => {
+        setToggleTimeslots(new Map());
+        window.alert("Success!");
+      })
+      .catch((e) => window.alert(e.errorMessage));
   };
 
   const handleVolunteerChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -182,7 +185,10 @@ export default function AssignmentForm() {
                   type="checkbox"
                   className="form-checkbox border-gray-300 rounded-sm shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
                   checked={timeslots[index].checked}
-                  disabled={timeslots[index].roomId != undefined && timeslots[index].roomId != parseInt(roomId)}
+                  disabled={
+                    timeslots[index].roomId != undefined &&
+                    timeslots[index].roomId != parseInt(roomId)
+                  }
                   onChange={() => handleTimeslotChange(timeslot, index)}
                 />
                 <label htmlFor={`timeslot-${index}`} className="ml-2">

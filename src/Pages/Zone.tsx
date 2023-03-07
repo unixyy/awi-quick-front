@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { zoneById, gamesByZone } from "../routes/routes";
 import { ZoneDto } from "../dto/zones.dto";
@@ -32,7 +32,7 @@ export default function Zone() {
       </div>
       <div className="mt-10 flex items-center justify-center">
         <div className="grid grid-cols-4 gap-4">
-          <div className="grid grid-cols-4 gap-4 max-w-max col-span-6 border-b-2 pb-4">
+          <div className="grid grid-cols-4 gap-4 w-full col-span-6 border-b-2 pb-4">
             <div className="font-bold">Room</div>
             <div className="font-bold">Table Count</div>
             <div className="font-bold">Game</div>

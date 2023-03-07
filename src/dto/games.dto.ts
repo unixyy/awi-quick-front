@@ -13,3 +13,12 @@ export interface GameTypeDto {
   value: string;
   name: string;
 }
+
+export type GamePlayroomDto = {
+  [weekday: string]: {
+    [room: string]: {
+      start: Date;
+      end: Date;
+    }[];
+  };
+}
