@@ -8,3 +8,8 @@ export interface GameDto extends TableData {
   image?: string;
   description?: string;
 }
+
+export interface GameTypeDto {
+  value: string;
+  name: string;
+}

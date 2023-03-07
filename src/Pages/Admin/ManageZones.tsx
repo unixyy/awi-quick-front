@@ -186,7 +186,7 @@ export default function ZoneForm() {
         ))}
       </select>
       {chosenZone.name && (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="mt-4">
           <input
             type="text"
             className="outlined"

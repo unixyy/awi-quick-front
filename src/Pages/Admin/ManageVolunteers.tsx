@@ -15,7 +15,6 @@ export default function ManageVolunteers() {
   const [volunteers, setVolunteers] = useState([]);
   const [searchResult, setSearchResult] = useState([]);
   const keyofVolunteer = [
-    "id",
     "username",
     "firstName",
     "lastName",
@@ -32,12 +31,11 @@ export default function ManageVolunteers() {
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     const search = event.target.value;
-    const result = volunteers.filter((entity: VolunteerDto) => {
-      return (
+    const result = volunteers.filter(
+      (entity: VolunteerDto) =>
         entity.username.toLowerCase().includes(search.toLowerCase()) ||
-        entity.email.toLowerCase().includes(search.toLowerCase())
-      );
-    });
+        entity.email.toLowerCase().includes(search.toLowerCase()),
+    );
     setSearchResult(result);
   };
 

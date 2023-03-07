@@ -1,6 +1,7 @@
 const root = process.env.API_URL;
 
 export const gameRoot = root + "/game/";
+export const gameTypes = gameRoot + "types";
 export const gameById = (id: string) => gameRoot + id;
 export const gamesByName = (name: string) => gameRoot + "name/" + name;
 export const gamesByType = (type: string) => gameRoot + "type/" + type;

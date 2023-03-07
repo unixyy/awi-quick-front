@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 input {
-  background-color: #fcffe7;
+  /* background-color: #fcffe7; */
 }
 
 input.outlined {
@@ -16,7 +16,7 @@ input.outlined {
 }
 
 input[type="text"].outlined:focus {
-  border-color: #007bff;
+  /* border-color: #007bff; */
   box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
 
@@ -222,18 +222,16 @@ label {
   height: 1em;
   width: 1em;
   color: currentColor;
-  background-color: #fcffe7;
-  border-color: #cbd5e0;
   border-width: 1px;
   border-radius: 0.25rem;
   transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
     box-shadow 0.15s ease-in-out;
 }
 
-.form-checkbox:checked {
+/* .form-checkbox:checked {
   background-color: #4299e1;
   border-color: #4299e1;
-}
+} */
 
 .form-checkbox:focus {
   outline: none;
@@ -241,8 +239,8 @@ label {
 }
 
 .form-checkbox:disabled {
-  background-color: #c7ced9;
-  border-color: #c7ced9;
+  /* background-color: #c7ced9;
+  border-color: #c7ced9; */
   cursor: not-allowed;
 }
 
@@ -254,13 +252,13 @@ label {
 
 .select select {
   appearance: none;
-  background-color: #fcffe7;
+  /* background-color: #fcffe7; */
   border: 1px solid #cbd5e0;
   border-radius: 0.25rem;
   padding: 0.5rem;
   font-size: 1rem;
   line-height: 1.5rem;
-  color: #4a5568;
+  /* color: #4a5568; */
   cursor: pointer;
   outline: none;
   width: 100%;
@@ -274,13 +272,13 @@ label {
   right: 0.75rem;
   transform: translateY(-50%);
   pointer-events: none;
-  color: #4a5568;
+  /* color: #4a5568; */
 }
 
 /* Style for options */
 .select select option {
-  background-color: #fcffe7;
-  color: #4a5568;
+  /* background-color: #fcffe7;
+  color: #4a5568; */
   border: none;
 }
 
