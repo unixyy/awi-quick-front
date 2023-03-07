@@ -26,6 +26,7 @@ const ManageMenu = React.lazy(() => import("./Pages/Admin/ManageMenu"));
 const ManageVolunteers = React.lazy(() => import("./Pages/Admin/ManageVolunteers"));
 const ManageGameAssign = React.lazy(() => import("./Pages/Admin/ManageGameAssignement"));
 const ManageVolunteerAssignments = React.lazy(() => import("./Pages/Admin/ManageVolunteerAssignments"));
+const Game = React.lazy(() => import("./Pages/Game"));
 const Zone = React.lazy(() => import("./Pages/Zone"));
 
 const Spinner = (
@@ -50,11 +51,19 @@ const router = createBrowserRouter([
       },
       {
         path: "/games",
-        element: <Games />,
+        children: [
+          {
+            path: "/games",
+            element: <Games/>,
+          },
+          {
+            path: "/games/:gameId",
+            element: <Game />,
+          },
+        ],
       },
       {
         path: "/zones",
-        element: <Zones />,
         children: [
           {
             path: "/zones",

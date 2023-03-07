@@ -228,10 +228,10 @@ label {
     box-shadow 0.15s ease-in-out;
 }
 
-/* .form-checkbox:checked {
+.form-checkbox:checked {
   background-color: #4299e1;
   border-color: #4299e1;
-} */
+}
 
 .form-checkbox:focus {
   outline: none;
@@ -239,8 +239,8 @@ label {
 }
 
 .form-checkbox:disabled {
-  /* background-color: #c7ced9;
-  border-color: #c7ced9; */
+  background-color: #c7ced9;
+  border-color: #c7ced9;
   cursor: not-allowed;
 }
 
